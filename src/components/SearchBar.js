@@ -9,7 +9,7 @@ const SearchBar = ({ searchTerm, onSearchTermChange, onSearchTermSubmit }) => {
             <TextInput
                 autoCapitalize="none"
                 autoCorrect={false}
-                placeholder="Search recipes"
+                placeholder="Search recipes by name or ingredient"
                 style={styles.inputStyle}
                 value={searchTerm}
                 onChangeText={newSearchTerm => onSearchTermChange(newSearchTerm)}
@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginHorizontal: 15,
         flexDirection: 'row',
+        marginBottom: 10,
     },
     inputStyle: {
         flex: 1,
-        fontSize: 18,
+        fontSize: 16,
     },
     iconStyle: {
         fontSize: 35,
