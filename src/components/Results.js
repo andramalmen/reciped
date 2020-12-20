@@ -1,11 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import useSearchByCategory from '../hooks/useSearchByCategory';
 import ResultDetails from './ResultDetails';
 
 const Results = ({ title }) => {
     const [data, error] = useSearchByCategory(title);
+    const navigation = useNavigation();
 
     if (error) {
         return <Text>Something went wrong</Text>;
@@ -24,7 +26,18 @@ const Results = ({ title }) => {
                 data={data.meals}
                 keyExtractor={result => result.idMeal}
                 renderItem={({ item }) => {
-                    return <ResultDetails result={item} />;
+                    return (
+                        <TouchableOpacity
+                            onPress={() =>
+                                navigation.navigate('RecipeDetails', {
+                                    id: item.idMeal,
+                                    name: item.strMeal,
+                                })
+                            }
+                        >
+                            <ResultDetails result={item} />
+                        </TouchableOpacity>
+                    );
                 }}
             />
         </View>

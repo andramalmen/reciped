@@ -2,8 +2,8 @@ import useSWR from 'swr';
 
 import { fetcher } from '../api/meals';
 
-const useSearchByCategory = category => {
-    const { data, error } = useSWR(`/filter.php?c=${category.toLowerCase()}`, fetcher, {
+const useSearchRecipeById = id => {
+    const { data, error } = useSWR(`/lookup.php?i=${id}`, fetcher, {
         onErrorRetry: (err, _, __, revalidate, { retryCount }) => {
             if (err.status === 404) {
                 return;
@@ -19,4 +19,4 @@ const useSearchByCategory = category => {
     return [data, error];
 };
 
-export default useSearchByCategory;
+export default useSearchRecipeById;
